@@ -4,7 +4,8 @@ import EventList from './EventList';
 import EventForm from './EventForm';
 import { createAppContainer} from 'react-navigation';
 //import RootNavigator from './RootNavigator.js'
-
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { formatDateTime} from './api'; 
 import { createStackNavigator } from 'react-navigation-stack';
 
 const rootStack = createStackNavigator({
