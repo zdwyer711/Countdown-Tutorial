@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, Text, StyleSheet } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import EventCard from './EventCard';
+import {getEvents} from './api';
 
 const styles = StyleSheet.create({
   list: {
@@ -26,26 +27,43 @@ class EventList extends Component {
       });
     }, 1000);
 
+    // this.props.navigation.addListener(
+    //   'didFocus',
+    //   () => {
+        getEvents().then(events => this.setState({ events }));
+    //   }
+    // );
+
+    getEvents().then(events => this.setState({ events }));
     const events = require('./db.json').events.map(e => ({
       ...e,
       date: new Date(e.date),
     }));
-    this.setState({ events });
+    //this.setState({ events });
   }
 
   handleAddEvent = () => {
-    this.props.navigation.navigate('form'); 
+    this.props.navigation.navigate('form');
   }
 
   render() {
     return [
       <FlatList
-          style={styles.list}
-          // data={[{name: 'a'},{name: 'b'}]}
+          // style={styles.list}
+          // // data={[{name: 'a'},{name: 'b'}]}
+          // data={this.state.events}
+          // //renderItem={({ item }) => <Text>{item.title}</Text>}
+          // renderItem={({ item }) => <EventCard event={item} />}
+          // keyExtractor={item => item.id}
+          key="flatlist"
           data={this.state.events}
-          //renderItem={({ item }) => <Text>{item.title}</Text>}
-          renderItem={({ item }) => <EventCard event={item} />}
+          style={styles.list}
           keyExtractor={item => item.id}
+          renderItem={({ item, separators }) => (
+            <EventCard
+              event={item}
+              />
+            )}
       />,
       <ActionButton
         key="fab"
