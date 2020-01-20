@@ -6,11 +6,16 @@ import Constants from 'expo-constants';
 const { manifest } = Constants;
 const api = manifest.packagerOpts.dev
   ? manifest.debuggerHost.split(':').shift().concat(':3000')
-  : 'productionurl.com'
+  : 'myproductionUrl.com'
 
-const url = 'http://${api}/events';
+
+//const url = 'http://192.168.56.1:3000/events';
+const url = 'http://localhost:3000/events';
 
 export function getEvents() {
+  console.log("============================");
+  console.log(url);
+  console.log("============================");
   return fetch(url)
     .then(response => response.json())
     .then(events => events.map(e => ({...e, date: new Date(e.date)})));

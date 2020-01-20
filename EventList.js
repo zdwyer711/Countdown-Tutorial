@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Text, StyleSheet } from 'react-native';
+import { FlatList, Text, StyleSheet, Button } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import EventCard from './EventCard';
 import {getEvents} from './api';
@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
 });
 
 class EventList extends Component {
+  static navigationOptions = {
+     title: 'Your Events',
+   };
+
   state = {
     events: []
   }
@@ -27,23 +31,35 @@ class EventList extends Component {
       });
     }, 1000);
 
-    // this.props.navigation.addListener(
-    //   'didFocus',
-    //   () => {
-        getEvents().then(events => this.setState({ events }));
-    //   }
-    // );
-
+    this.props.navigation.addListener(
+      'didFocus',
+      () => {
     getEvents().then(events => this.setState({ events }));
-    const events = require('./db.json').events.map(e => ({
-      ...e,
-      date: new Date(e.date),
-    }));
-    //this.setState({ events });
+      }
+    );
+
+    // const events = require('./db.json').events.map(e => ({
+    //   ...e,
+    //   date: new Date(e.date),
+    // }));
+    // this.setState({ events });
+  }
+
+  // componentDidUpdate() {
+  //     this._updateComponent;
+  // }
+
+  _updateComponent = (e) => {
+      console.log("hello you made it into _updateComponent!");
+      getEvents().then(events => this.setState({ events }));
   }
 
   handleAddEvent = () => {
     this.props.navigation.navigate('form');
+  }
+
+  handleLocationNav = () => {
+    this.props.navigation.navigate('location');
   }
 
   render() {
@@ -69,6 +85,11 @@ class EventList extends Component {
         key="fab"
         onPress={this.handleAddEvent}
         buttonColor="rgba(231,76,60,1)"
+      />,
+      <Button
+        title="Your Location"
+        onPress={this.handleLocationNav}
+        buttonColor="rgba(231,76,77,1)"
       />
     ];
     }
