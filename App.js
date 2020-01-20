@@ -2,10 +2,12 @@ import React from 'react';
 //import { StyleSheet, Text, View } from 'react-native';
 import EventList from './EventList';
 import EventForm from './EventForm';
+import ClientMap from './ClientMap';
+import ClientMapLocation from './ClientMapLocation';
 import { createAppContainer} from 'react-navigation';
 //import RootNavigator from './RootNavigator.js'
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { formatDateTime} from './api'; 
+import { formatDateTime} from './api';
 import { createStackNavigator } from 'react-navigation-stack';
 
 const rootStack = createStackNavigator({
@@ -16,11 +18,23 @@ const rootStack = createStackNavigator({
       }),
     },
     form: {
-      screen: EventForm,
+      screen: ClientMap,
       navigationOptions: () => ({
-        title: "Add an Event",
+        title: "Your Location",
       }),
     },
+    location: {
+      screen: ClientMapLocation,
+      navigationOptions: () => ({
+        title: "Your Location",
+      }),
+    },
+    // form: {
+    //   screen: EventForm,
+    //   navigationOptions: () => ({
+    //     title: "Add an Event",
+    //   }),
+    // },
 });
 
 const App = createAppContainer(rootStack);
