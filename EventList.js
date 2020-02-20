@@ -61,6 +61,9 @@ class EventList extends Component {
   handleLocationNav = () => {
     this.props.navigation.navigate('location');
   }
+  handlePlayerNav = () => {
+    this.props.navigation.navigate('player');
+  }
 
   render() {
     return [
@@ -89,6 +92,11 @@ class EventList extends Component {
       <Button
         title="Your Location"
         onPress={this.handleLocationNav}
+        buttonColor="rgba(231,76,77,1)"
+      />,
+      <Button
+        title="Spotify API Player"
+        onPress={this.handlePlayerNav}
         buttonColor="rgba(231,76,77,1)"
       />
     ];

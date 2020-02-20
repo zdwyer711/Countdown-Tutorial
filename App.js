@@ -4,6 +4,7 @@ import EventList from './EventList';
 import EventForm from './EventForm';
 import ClientMap from './ClientMap';
 import ClientMapLocation from './ClientMapLocation';
+import SpotifyApiPlayer from './SpotifyApiPlayer';
 import { createAppContainer} from 'react-navigation';
 //import RootNavigator from './RootNavigator.js'
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -20,13 +21,19 @@ const rootStack = createStackNavigator({
     form: {
       screen: ClientMap,
       navigationOptions: () => ({
-        title: "Your Location",
+        title: "Your Location on a Map",
       }),
     },
     location: {
       screen: ClientMapLocation,
       navigationOptions: () => ({
         title: "Your Location",
+      }),
+    },
+    player: {
+      screen: SpotifyApiPlayer,
+      navigationOptions: () => ({
+        title: "Spotify API Player",
       }),
     },
     // form: {
