@@ -37,34 +37,53 @@ class SpotifyApiPlayer extends Component {
     let _token = "yes, hello";
     let _authToken = "";
 
-    const getAuthorizationCode = async () => {
-      try {
-        const credentials = await getSpotifyCredentials() //we wrote this function above
-        const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
-        const result = await AuthSession.startAsync({
+    let redirectUrl = AuthSession.getRedirectUrl();
+    console.log("==========Redirect Url============");
+    console.log(redirectUrl);
+    const result = AuthSession.startAsync({
           authUrl:
             'https://accounts.spotify.com/authorize/' +
             '?response_type=code' +
             '&client_id=ee58d123abe9446581fabc57e897e75a' +
             '&scope=user-modify-playback-state' +
-            '&redirect_uri=http://localhost:19002/',
-          // authUrl:
-          //   'https://accounts.spotify.com/authorize' +
-          //   '?response_type=code' +
-          //   '&client_id=' +
-          //   credentials.clientId +
-          //   (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-          //   '&redirect_uri=' +
-          //   encodeURIComponent(redirectUrl),
-        })
-        } catch (err) {
-          console.error(err)
-        }
-          console.log("======Response========");
-          console.log(result);
-          console.log("==============");
-          return result.params.code
-        }
+            '&redirect_uri=' +
+            encodeURIComponent(redirectUrl),
+        });
+    console.log("=======Result==========");
+    console.log(result);
+    // const getAuthorizationCode = async () => {
+    //   try {
+    //     let redirectUrl = AuthSession.getRedirectUrl();
+    //     console.log("======================");
+    //     console.log(redirectUrl);
+    //     //const credentials = await getSpotifyCredentials() //we wrote this function above
+    //     //const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
+    //     const result = await AuthSession.startAsync({
+    //       authUrl:
+    //         'https://accounts.spotify.com/authorize/' +
+    //         '?response_type=code' +
+    //         '&client_id=ee58d123abe9446581fabc57e897e75a' +
+    //         '&scope=user-modify-playback-state' +
+    //         '&redirect_uri=' +
+    //         encodeURIComponent(redirectUrl),
+    //       // authUrl:
+    //       //   'https://accounts.spotify.com/authorize' +
+    //       //   '?response_type=code' +
+    //       //   '&client_id=' +
+    //       //   credentials.clientId +
+    //       //   (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+    //       //   '&redirect_uri=' +
+    //       //   encodeURIComponent(redirectUrl),
+    //     });
+    //     this.setState({ result });
+    //     } catch (err) {
+    //       console.error(err)
+    //     }
+    //       console.log("======Response========");
+    //       console.log(result);
+    //       console.log("==============");
+    //       return result.params.code
+    //     }
 
     // if (_token) {
     //   // Set token
@@ -76,10 +95,44 @@ class SpotifyApiPlayer extends Component {
     // console.log("=======================");
     // console.dir(getAuthorizationCode);
     // console.log("=======================");
-    var wtf = getAuthorizationCode;
-    console.log("=======WTF=======");
-    console.log(this.wtf);
+  //  var wtf = this.getAuthorizationCode;
+    // console.log("=======WTF=======");
+    // console.log(this.wtf);
   }
+
+  getAuthorizationCode() {
+    //try {
+      //const credentials = await getSpotifyCredentials() //we wrote this function above
+      //const credentials = getSpotifyCredentials()
+      const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
+      console.log("======getAuthorizationCode=========");
+      console.log(redirectUrl);
+      //const result = await AuthSession.startAsync({
+      // var result = AuthSession.startAsync({
+      //   authUrl:
+      //     'https://accounts.spotify.com/authorize/' +
+      //     '?response_type=code' +
+      //     '&client_id=ee58d123abe9446581fabc57e897e75a' +
+      //     '&scope=user-modify-playback-state' +
+      //     '&redirect_uri=http://localhost:19002/',
+      //   // authUrl:
+      //   //   'https://accounts.spotify.com/authorize' +
+      //   //   '?response_type=code' +
+      //   //   '&client_id=' +
+      //   //   credentials.clientId +
+      //   //   (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+      //   //   '&redirect_uri=' +
+      //   //   encodeURIComponent(redirectUrl),
+      // })
+      // } catch (err) {
+      //   console.log("error encountered");
+      //   console.error(err)
+      // }
+        console.log("======Response========");
+        console.log(result);
+        console.log("==============");
+        return result.params.code;
+      }
 
   getCurrentlyPlaying(token) {
     // var url = 'https://accounts.spotify.com/authorize/'
